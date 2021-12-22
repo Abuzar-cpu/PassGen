@@ -43,7 +43,7 @@ namespace PasswordGenerator
             this.lblSettings = new System.Windows.Forms.Label();
             this.tbConsole = new System.Windows.Forms.TextBox();
             this.nudPassLength = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblLength = new System.Windows.Forms.Label();
             this.cbShowPass = new System.Windows.Forms.CheckBox();
             this.timerChecks = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.nudPassLength)).BeginInit();
@@ -187,16 +187,16 @@ namespace PasswordGenerator
             0,
             0});
             // 
-            // label1
+            // lblLength
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label1.Location = new System.Drawing.Point(12, 143);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(130, 20);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "Password length:";
+            this.lblLength.AutoSize = true;
+            this.lblLength.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLength.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblLength.Location = new System.Drawing.Point(12, 143);
+            this.lblLength.Name = "lblLength";
+            this.lblLength.Size = new System.Drawing.Size(130, 20);
+            this.lblLength.TabIndex = 14;
+            this.lblLength.Text = "Password length:";
             // 
             // cbShowPass
             // 
@@ -213,7 +213,7 @@ namespace PasswordGenerator
             // timerChecks
             // 
             this.timerChecks.Enabled = true;
-            this.timerChecks.Interval = 500;
+            this.timerChecks.Interval = 300;
             this.timerChecks.Tick += new System.EventHandler(this.timerChecks_Tick);
             // 
             // Main
@@ -221,9 +221,9 @@ namespace PasswordGenerator
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Indigo;
-            this.ClientSize = new System.Drawing.Size(269, 475);
+            this.ClientSize = new System.Drawing.Size(269, 493);
             this.Controls.Add(this.cbShowPass);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblLength);
             this.Controls.Add(this.nudPassLength);
             this.Controls.Add(this.tbConsole);
             this.Controls.Add(this.lblSettings);
@@ -262,7 +262,7 @@ namespace PasswordGenerator
         private System.Windows.Forms.Label lblSettings;
         private System.Windows.Forms.TextBox tbConsole;
         private System.Windows.Forms.NumericUpDown nudPassLength;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblLength;
         private System.Windows.Forms.CheckBox cbShowPass;
         private System.Windows.Forms.Timer timerChecks;
     }

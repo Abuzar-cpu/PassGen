@@ -24,6 +24,7 @@ namespace PasswordGenerator
 
         private void btnGenerate_Click(object sender, EventArgs e)
         {
+            btnGenerate.BackColor = Color.Transparent;
             
             tbConsole.AppendText("Generating...\r\n");
 
@@ -45,40 +46,46 @@ namespace PasswordGenerator
 
             if (cbCheckSecurity.Checked)
             {
-                int response = pwnedApiCheck(generated);
-                if (response == -1)
-                {
-                    tbConsole.AppendText("No connection\r\n");
-                    return;
-                }
-                tbConsole.AppendText("Checking security...\r\n");
-                bool isSecure = response == 0 ? true : false;
-
-                if(cbShowPass.Checked)
-                {
-                    if(isSecure)
-                    {
-                        btnGenerate.BackColor = Color.Lime;
-                        tbConsole.AppendText(generated + " is all safe\r\n");
-                    }
-                    else
-                    {
-                        btnGenerate.BackColor = Color.Red;
-                        tbConsole.AppendText(generated + " was found " + response + " times. Please generate again\r\n");
-                    }
-                }
+                if (generated == "")
+                    tbConsole.AppendText("Password length is zero\r\n");
 
                 else
                 {
-                    if (isSecure)
+                    int response = pwnedApiCheck(generated);
+                    if (response == -1)
                     {
-                        btnGenerate.BackColor = Color.Lime;
-                        tbConsole.AppendText("Your password is all safe\r\n");
+                        tbConsole.AppendText("No connection\r\n");
+                        return;
                     }
+                    tbConsole.AppendText("Checking security...\r\n");
+                    bool isSecure = response == 0 ? true : false;
+
+                    if (cbShowPass.Checked)
+                    {
+                        if (isSecure)
+                        {
+                            btnGenerate.BackColor = Color.Lime;
+                            tbConsole.AppendText(generated + " is all safe\r\n");
+                        }
+                        else
+                        {
+                            btnGenerate.BackColor = Color.Red;
+                            tbConsole.AppendText(generated + " was found " + response + " times. Please generate again\r\n");
+                        }
+                    }
+
                     else
                     {
-                        btnGenerate.BackColor = Color.Red;
-                        tbConsole.AppendText("This password is not safe. Please generate again\r\n");
+                        if (isSecure)
+                        {
+                            btnGenerate.BackColor = Color.Lime;
+                            tbConsole.AppendText("Your password is all safe\r\n");
+                        }
+                        else
+                        {
+                            btnGenerate.BackColor = Color.Red;
+                            tbConsole.AppendText("This password is not safe. Please generate again\r\n");
+                        }
                     }
                 }
             }
@@ -89,9 +96,9 @@ namespace PasswordGenerator
         public string GeneratePassword(bool useLowercase, bool useUppercase, bool useNumbers, bool useSpecial,
             int passwordSize)
         {
-            char[] _password = new char[passwordSize];
+            char[] password = new char[passwordSize];
             string charSet = ""; // Initialise to blank
-            System.Random _random = new Random();
+            System.Random random = new Random();
             int counter;
 
             // Build up the character set to choose from
@@ -103,12 +110,15 @@ namespace PasswordGenerator
 
             if (useSpecial) charSet += SPECIALS;
 
+            if (charSet.Length == 0)
+                return "";
+
             for (counter = 0; counter < passwordSize; counter++)
             {
-                _password[counter] = charSet[_random.Next(charSet.Length - 1)];
+                password[counter] = charSet[random.Next(charSet.Length - 1)];
             }
 
-            return String.Join(null, _password);
+            return String.Join(null, password);
         }
 
 
@@ -157,8 +167,8 @@ namespace PasswordGenerator
 
 
         // PASSWORD SECURITY CHECKING AREA
-//      ---------------------------------------------------------------------------------------------------------------
-//      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // ---------------------------------------------------------------------------------------------------------------
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // Hashes the input data in sha1. NOTE: this type of encoding is not secure anymore
         static string Hash(string input)
         {
