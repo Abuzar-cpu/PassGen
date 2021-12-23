@@ -154,7 +154,7 @@ namespace PasswordGenerator
             if (cbShowPass.Checked)
             {
 
-                if (MessageBox.Show(text: "Be sure you are safe :)", caption: "Showing pasword", buttons: MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+                if (MessageBox.Show(text: "Be sure there is no one looking at your password", caption: "Showing pasword", buttons: MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                     tbGenerated.PasswordChar = '\0';
                 else
                     cbShowPass.Checked = false;
